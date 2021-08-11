@@ -36,6 +36,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         Transform chosenSpawn = spawnPoints[index].transform;
 
-        PhotonNetwork.Instantiate("Player", chosenSpawn.position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Prefabs/Player", chosenSpawn.position, Quaternion.identity);
     }
 }
