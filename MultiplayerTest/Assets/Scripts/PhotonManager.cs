@@ -9,6 +9,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     [SerializeField]
     GameObject[] spawnPoints;
 
+    public List<int> usedSpawns = new List<int>();
+
     private void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -31,7 +33,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        int index = (int)Random.Range(0, spawnPoints.Length - 1);
+        int index = 0;
+        do
+        {
+            index = (int)Random.Range(0, spawnPoints.Length - 1);
+        } while (usedSpawns.Contains(index));
 
         Transform chosenSpawn = spawnPoints[index].transform;
 
