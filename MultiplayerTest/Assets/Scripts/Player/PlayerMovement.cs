@@ -10,57 +10,64 @@ public class PlayerMovement : MonoBehaviour
 
     //Keybind
     [SerializeField]
-    KeyCode[] left, right, jump;
+    KeyCode left, right, jump;
     [SerializeField]
     float speed = 2.0f;
     [SerializeField]
     float jumpStrength = 1.0f;
 
+    bool isLeft = false, isRight = false, isJump = false;
+
+    float dt { get => Time.deltaTime; }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
-    {
-        float dt = Time.deltaTime;
-        bool isLeft = false, isRight = false, isJump = false;
-
+    void Update() 
+    { 
         #region Left Detection
-        foreach (KeyCode keybind in left)
+        if (Input.GetKey(left))
         {
-            if (Input.GetKey(keybind))
-            {
-                isLeft = true;
-            }
+            isLeft = true;
+            transform.rotation = Quaternion.AngleAxis(0, Vector2.up);
+        }
+        else
+        {
+            isLeft = false;
         }
         #endregion
         #region Right Detection
-        foreach (KeyCode keybind in right)
+        if (Input.GetKey(right))
         {
-            if (Input.GetKey(keybind))
-            {
-                isRight = true;
-            }
+            isRight = true;
+            transform.rotation = Quaternion.AngleAxis(180, Vector2.up);
+        }
+        else
+        {
+            isRight = false;
         }
         #endregion
         #region Jump Detection
-        foreach (KeyCode keybind in jump)
+        if (Input.GetKeyDown(jump))
         {
-            if (Input.GetKeyDown(keybind))
-            {
-                isJump = true;
-            }
+            isJump = true;
         }
         #endregion
+    }
 
-        float x = 0, y = 0;
-        if (isLeft) x -= speed * 1000 * dt;
-        if (isRight) x += speed * 1000 * dt;
-        if (isJump) y += (jumpStrength * 1000 * dt) + rb.gravityScale;
+    private void FixedUpdate()
+    {
+        float x = 0;
+        if (isLeft) x -= speed;
+        if (isRight) x += speed;
+        if (isJump) 
+        {
+            rb.AddForce(jumpStrength * Vector2.up, ForceMode2D.Impulse);
+            isJump = false;
+        }
 
-        rb.AddForce(new Vector2(0, y), ForceMode2D.Impulse);
-        rb.velocity = new Vector2(x, rb.velocity.y);
+        rb.velocity = new Vector2 ( x, rb.velocity.y );
     }
 }
