@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    float deathCooldown = 10.0f;
+
     void Start()
     {
-        
+        deathCooldown = 10.0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        float dt = Time.deltaTime;
+        if (deathCooldown > 0) deathCooldown -= dt;
     }
 }

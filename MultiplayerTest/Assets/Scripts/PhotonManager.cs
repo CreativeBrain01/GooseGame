@@ -31,8 +31,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        int index = 0;
-        index = (int)Random.Range(0, spawnPoints.Length - 1);
+        int index = (int)Random.Range(0, spawnPoints.Length - 1);
 
         Transform chosenSpawn = spawnPoints[index].transform;
 
