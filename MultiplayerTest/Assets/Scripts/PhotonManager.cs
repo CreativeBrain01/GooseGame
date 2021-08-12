@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -28,7 +29,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions { MaxPlayers = 4 }, TypedLobby.Default);
+
+        string scene = SceneManager.GetActiveScene().name;
+        PhotonNetwork.JoinOrCreateRoom(scene, new RoomOptions { MaxPlayers = 4 }, TypedLobby.Default);
     }
 
     public override void OnJoinedRoom()
