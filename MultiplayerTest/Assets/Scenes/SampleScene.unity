@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 1344611}
   - component: {fileID: 1344612}
   - component: {fileID: 1344613}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_0 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 86180073}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 160690273}
   - component: {fileID: 160690274}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_2 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 179735108}
   - component: {fileID: 179735109}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_2 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,7 +468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 216583789}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,7 +572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 321676312}
   - component: {fileID: 321676313}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_1 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,7 +654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 347285472}
   m_Layer: 0
-  m_Name: Bakground
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -668,8 +668,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347285471}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0079463, y: 0, z: 0}
-  m_LocalScale: {x: 1.075, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1, z: 1}
   m_Children:
   - {fileID: 1754767997}
   - {fileID: 528035139}
@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 377224798}
   - component: {fileID: 377224799}
   - component: {fileID: 377224800}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_1 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -797,7 +797,7 @@ GameObject:
   - component: {fileID: 515390341}
   - component: {fileID: 515390342}
   - component: {fileID: 515390343}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_0 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1078,7 +1078,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: 77aaa989fb436984f88203f41e3010c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1100,7 +1100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 625108768}
   - component: {fileID: 625108769}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1183,7 +1183,7 @@ GameObject:
   - component: {fileID: 630011589}
   - component: {fileID: 630011590}
   - component: {fileID: 630011591}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_0 (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1292,7 +1292,7 @@ GameObject:
   - component: {fileID: 641814935}
   - component: {fileID: 641814936}
   - component: {fileID: 641814937}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_1 (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1424,6 +1424,7 @@ MonoBehaviour:
   - {fileID: 201363818}
   - {fileID: 523277925}
   - {fileID: 1774335015}
+  usedSpawns: 
 --- !u!4 &655854093
 Transform:
   m_ObjectHideFlags: 0
@@ -1460,7 +1461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 752048358}
   - component: {fileID: 752048359}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1543,7 +1544,7 @@ GameObject:
   - component: {fileID: 825422866}
   - component: {fileID: 825422867}
   - component: {fileID: 825422868}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_0 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1650,7 +1651,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 826360531}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1694,7 +1695,7 @@ GameObject:
   - component: {fileID: 837405682}
   - component: {fileID: 837405683}
   - component: {fileID: 837405684}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_2 (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1803,7 +1804,7 @@ GameObject:
   - component: {fileID: 888200503}
   - component: {fileID: 888200504}
   - component: {fileID: 888200505}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_0 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1911,7 +1912,7 @@ GameObject:
   m_Component:
   - component: {fileID: 976759075}
   - component: {fileID: 976759076}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1994,7 +1995,7 @@ GameObject:
   - component: {fileID: 985745996}
   - component: {fileID: 985745997}
   - component: {fileID: 985745998}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_2 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2103,7 +2104,7 @@ GameObject:
   - component: {fileID: 1003748992}
   - component: {fileID: 1003748993}
   - component: {fileID: 1003748994}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_1 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2212,7 +2213,7 @@ GameObject:
   - component: {fileID: 1014880679}
   - component: {fileID: 1014880680}
   - component: {fileID: 1014880681}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_2 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2321,7 +2322,7 @@ GameObject:
   - component: {fileID: 1093849560}
   - component: {fileID: 1093849561}
   - component: {fileID: 1093849562}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_1 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2429,7 +2430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1096271288}
   - component: {fileID: 1096271289}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2512,7 +2513,7 @@ GameObject:
   - component: {fileID: 1101505419}
   - component: {fileID: 1101505420}
   - component: {fileID: 1101505421}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_0 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2621,7 +2622,7 @@ GameObject:
   - component: {fileID: 1112780607}
   - component: {fileID: 1112780608}
   - component: {fileID: 1112780609}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_0 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2730,7 +2731,7 @@ GameObject:
   - component: {fileID: 1116789660}
   - component: {fileID: 1116789661}
   - component: {fileID: 1116789662}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_2 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2839,7 +2840,7 @@ GameObject:
   - component: {fileID: 1182695586}
   - component: {fileID: 1182695587}
   - component: {fileID: 1182695588}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_0 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2948,7 +2949,7 @@ GameObject:
   - component: {fileID: 1545817307}
   - component: {fileID: 1545817308}
   - component: {fileID: 1545817309}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_2 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3057,7 +3058,7 @@ GameObject:
   - component: {fileID: 1619473291}
   - component: {fileID: 1619473292}
   - component: {fileID: 1619473293}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3225,7 +3226,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: cef95f086fda84140b17040b5aee84c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3247,7 +3248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1677882071}
   - component: {fileID: 1677882072}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_1 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3329,7 +3330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1687177176}
   - component: {fileID: 1687177177}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_2 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3411,7 +3412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1701925939}
   - component: {fileID: 1701925940}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3553,7 +3554,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 16d7cbbe79dd16e489cd088551c93c95, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3576,7 +3577,7 @@ GameObject:
   - component: {fileID: 1759966129}
   - component: {fileID: 1759966130}
   - component: {fileID: 1759966131}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3713,7 +3714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1774465394}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3757,7 +3758,7 @@ GameObject:
   - component: {fileID: 1910748948}
   - component: {fileID: 1910748949}
   - component: {fileID: 1910748950}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_1 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3866,7 +3867,7 @@ GameObject:
   - component: {fileID: 1996884141}
   - component: {fileID: 1996884142}
   - component: {fileID: 1996884143}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_0 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3975,7 +3976,7 @@ GameObject:
   - component: {fileID: 2006119793}
   - component: {fileID: 2006119794}
   - component: {fileID: 2006119795}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_0 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4083,7 +4084,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2012758181}
   - component: {fileID: 2012758182}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4166,7 +4167,7 @@ GameObject:
   - component: {fileID: 2013417329}
   - component: {fileID: 2013417330}
   - component: {fileID: 2013417331}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_0 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4275,7 +4276,7 @@ GameObject:
   - component: {fileID: 2099695425}
   - component: {fileID: 2099695426}
   - component: {fileID: 2099695427}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4383,7 +4384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2129895618}
   - component: {fileID: 2129895619}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tiles_Desert_Size_500_Percent_1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

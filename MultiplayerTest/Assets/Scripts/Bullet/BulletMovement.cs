@@ -7,6 +7,8 @@ using UnityEngine;
 public class BulletMovement : MonoBehaviour
 {
     //Components
+    [Header("Rigid Body")]
+    [SerializeField]
     Rigidbody2D rb;
 
     GameObject owner;
@@ -18,12 +20,22 @@ public class BulletMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Destroy(gameObject, 3);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (collision.collider.gameObject == Owner) return;
+        if(collision.collider.gameObject.layer == 6)
+        {
+            Debug.Log("Hit");
+        }
+        Destroy(gameObject);
+    }
+
+    public void Shoot(GameObject owner)
+    {
+        Owner = owner;
+        rb.velocity = (owner.transform.rotation.y == 0) ? Vector2.left * speed : Vector2.right * speed;
     }
 }

@@ -18,11 +18,16 @@ public class PlayerMovement : MonoBehaviour
 
     bool isLeft = false, isRight = false, isJump = false;
 
+    [SerializeField]
+    bool canJump = false;
+    EdgeCollider2D bottomCollider;
+
     float dt { get => Time.deltaTime; }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        bottomCollider = GetComponent<EdgeCollider2D>();
     }
 
     void Update() 
@@ -50,11 +55,20 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
         #region Jump Detection
-        if (Input.GetKeyDown(jump))
+        if (Input.GetKeyDown(jump) && canJump)
         {
             isJump = true;
         }
         #endregion
+
+        if (bottomCollider.IsTouchingLayers(LayerMask.GetMask("Terrain")))
+        {
+            canJump = true;
+        }
+        else
+        {
+            canJump = false;
+        }
     }
 
     private void FixedUpdate()
