@@ -29,7 +29,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-
         string scene = SceneManager.GetActiveScene().name;
         PhotonNetwork.JoinOrCreateRoom(scene, new RoomOptions { MaxPlayers = 4 }, TypedLobby.Default);
     }
