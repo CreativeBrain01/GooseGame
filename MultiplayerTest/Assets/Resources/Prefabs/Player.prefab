@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ccb80992f69f564c9c170a5e1d7242f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.4
+  fireRate: 0.8
   bullet: {fileID: 5629168240415310899, guid: b4150c3068afdea4b9c52e91a44d7b4c, type: 3}
   shootPosition: {fileID: 600158121197509999}
 --- !u!114 &2191782965712826463
