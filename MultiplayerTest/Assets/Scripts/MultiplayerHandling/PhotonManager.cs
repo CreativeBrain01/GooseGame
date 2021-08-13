@@ -14,27 +14,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
-    }
-
-    private void Update()
-    {
-        
-    }
-
-    public override void OnConnectedToMaster()
-    {
-        PhotonNetwork.JoinLobby();
-    }
-
-    public override void OnJoinedLobby()
-    {
-        string scene = SceneManager.GetActiveScene().name;
-        PhotonNetwork.JoinOrCreateRoom(scene, new RoomOptions { MaxPlayers = 4 }, TypedLobby.Default);
-    }
-
-    public override void OnJoinedRoom()
-    {
         int index = 0;
         do
         {

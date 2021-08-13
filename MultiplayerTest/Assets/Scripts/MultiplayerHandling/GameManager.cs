@@ -1,20 +1,35 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
+    /*#region Photon Callbacks
 
-    float deathCooldown = 10.0f;
-
-    void Start()
+    private void Start()
     {
-        deathCooldown = 10.0f;
+        PhotonNetwork.Instantiate("Player", )
+    }*/
+
+    /*/// <summary>
+    /// Called when the local player left the room. We need to load the launcher scene.
+    /// </summary>
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene(0);
     }
 
-    void Update()
+    #endregion
+
+    #region Public Methods
+
+    public void LeaveRoom()
     {
-        float dt = Time.deltaTime;
-        if (deathCooldown > 0) deathCooldown -= dt;
+        PhotonNetwork.LeaveRoom();
     }
+
+    #endregion*/
 }
