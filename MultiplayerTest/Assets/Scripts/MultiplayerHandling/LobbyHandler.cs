@@ -44,7 +44,7 @@ public class LobbyHandler : MonoBehaviourPunCallbacks
 
             case 2:
                 Debug.LogError("Sorry that Arena hasn't been added yet, please select a different one.");
-                //PhotonNetwork.LoadLevel("Arena3");
+                PhotonNetwork.LoadLevel("Arena3");
                 break;
 
             default:
