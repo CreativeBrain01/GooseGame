@@ -12,6 +12,8 @@ public class LobbyHandler : MonoBehaviourPunCallbacks
     [Tooltip("The Dropdown menu for users to select what map they load into.")]
     [SerializeField]
     private Dropdown arenaSelection;
+    [SerializeField]
+    Text RoomCode;
 
 
     #region Private Methods
@@ -22,6 +24,8 @@ public class LobbyHandler : MonoBehaviourPunCallbacks
         {
             lobbyMenu.SetActive(false);
         }
+
+        RoomCode.text = "Room Code: " + PhotonNetwork.CurrentRoom.Name;
     }
 
     public void LoadArena()
@@ -30,7 +34,6 @@ public class LobbyHandler : MonoBehaviourPunCallbacks
         {
             Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
         }
-        //Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
 
         switch (arenaSelection.value)
         {
@@ -43,7 +46,6 @@ public class LobbyHandler : MonoBehaviourPunCallbacks
                 break;
 
             case 2:
-                Debug.LogError("Sorry that Arena hasn't been added yet, please select a different one.");
                 PhotonNetwork.LoadLevel("Arena3");
                 break;
 

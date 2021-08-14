@@ -13,6 +13,10 @@ namespace Com.MyCompany.MyGame
     [RequireComponent(typeof(InputField))]
     public class PlayerNameInputField : MonoBehaviour
     {
+        [SerializeField]
+        GameObject hostplayDropdown;
+
+
         #region Private Constants
 
         // Store the PlayerPref Key to avoid typos
@@ -28,8 +32,6 @@ namespace Com.MyCompany.MyGame
         /// </summary>
         void Start()
         {
-
-
             string defaultName = string.Empty;
             InputField _inputField = this.GetComponent<InputField>();
             if (_inputField != null)
@@ -42,6 +44,8 @@ namespace Com.MyCompany.MyGame
             }
 
             PhotonNetwork.NickName = defaultName;
+
+            hostplayDropdown.SetActive(CheckNameLength(PhotonNetwork.NickName));
         }
 
         #endregion
@@ -49,22 +53,32 @@ namespace Com.MyCompany.MyGame
 
         #region Public Methods
 
+        bool CheckNameLength(string name)
+        {
+            return (name.Trim().Length > 3 && name.Trim().Length < 20);
+        }
+
         /// <summary>
         /// Sets the name of the player, and save it in the PlayerPrefs for future sessions.
         /// </summary>
         /// <param name="value">The name of the Player</param>
         public void SetPlayerName(string value)
         {
-            // #Important
-            if (string.IsNullOrEmpty(value))
+            bool validName = CheckNameLength(value);
+
+            hostplayDropdown.SetActive(validName);
+            if (validName)
             {
-                Debug.LogError("Player Name is null or empty");
-                return;
+                // #Important
+                if (string.IsNullOrEmpty(value.Trim()))
+                {
+                    Debug.LogError("Player Name is null or empty");
+                    return;
+                }
+                PhotonNetwork.NickName = value.Trim();
+
+                PlayerPrefs.SetString(playerNamePrefKey, value.Trim());
             }
-            PhotonNetwork.NickName = value;
-
-
-            PlayerPrefs.SetString(playerNamePrefKey, value);
         }
 
         #endregion

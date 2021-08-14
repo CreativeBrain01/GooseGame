@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections.Generic;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
@@ -18,6 +19,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     [Tooltip("The UI Label to inform the user that the connection is in progress.")]
     [SerializeField]
     private GameObject progressLabel;
+
+    [SerializeField]
+    InputField roomCodeInput;
     
     #endregion
 
@@ -31,6 +35,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     string gameVersion = "1";
     bool isConnecting;
 
+    List<string> roomCodes;
     #endregion
 
 
@@ -45,6 +50,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         // #Critical
         // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
         PhotonNetwork.AutomaticallySyncScene = true;
+        roomCodes = new List<string>();
     }
 
 
@@ -55,7 +61,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         
     }
-
 
     #endregion
 
@@ -87,6 +92,72 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
     }
 
+    string theAlphabet = "abcdefghijklmnopqrstuvwxyz";
+
+    string roomCode = "ABC123";
+    public void HostLobby()
+    {
+        //Ensuring Username is OK
+        //Generating Roomcode
+        int nickL = PhotonNetwork.NickName.Length;
+        int codeLength = Mathf.Clamp(nickL, 4, 8);
+
+        do
+        {
+            string newCode = "";
+            for (int i = 0; i < codeLength; i++)
+            {
+                switch (Mathf.RoundToInt(Random.Range(0, 1)))
+                {
+                    case 0:
+                        newCode += theAlphabet[Mathf.RoundToInt(Random.Range(0, 25))];
+                        break;
+
+                    case 1:
+                        newCode += Mathf.RoundToInt(Random.Range(0, 9));
+                        break;
+
+                    default:
+                        Debug.LogError("Woops random code generation ran into an issue. This could cause long waiting times please fix.");
+                        break;
+                }
+            }
+            roomCode = newCode;
+        } while (roomCode == "ABC123" || roomCodes.Contains(roomCode));
+
+        roomCodes.Add(roomCode);
+
+        progressLabel.SetActive(true);
+        controlPanel.SetActive(false);
+
+        // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
+        if (PhotonNetwork.IsConnected)
+        {
+            // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
+            //PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+            PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+            PhotonNetwork.JoinRoom(roomCode);
+        }
+        else
+        {
+            // #Critical, we must first and foremost connect to Photon Online Server.
+            isConnecting = PhotonNetwork.ConnectUsingSettings();
+            PhotonNetwork.GameVersion = gameVersion;
+        }
+    }
+
+    public void JoinLobby()
+    {
+        string roomCode = roomCodeInput.text.Trim();
+        if (roomCode != null && !roomCode.Contains(" "))
+        {
+            PhotonNetwork.JoinRoom(roomCode);
+        } else
+        {
+            //Room does not exist message 
+        }
+    }
+
     #endregion
 
     #region MonoBehaviourPunCallbacks Callbacks
@@ -95,7 +166,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
-        PhotonNetwork.JoinRandomRoom();
+        PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        PhotonNetwork.JoinRoom(roomCode);
         isConnecting = false;
     }
 
