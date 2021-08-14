@@ -55,7 +55,7 @@ namespace Com.MyCompany.MyGame
 
         bool CheckNameLength(string name)
         {
-            return (name.Trim().Length > 3 && name.Trim().Length < 20);
+            return (name.Trim().Length >= 3 && name.Trim().Length < 20);
         }
 
         /// <summary>

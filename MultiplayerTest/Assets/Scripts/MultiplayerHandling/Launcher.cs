@@ -53,15 +53,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         roomCodes = new List<string>();
     }
 
-
-    /// <summary>
-    /// MonoBehaviour method called on GameObject by Unity during initialization phase.
-    /// </summary>
-    void Start()
-    {
-        
-    }
-
     #endregion
 
 
@@ -107,7 +98,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             string newCode = "";
             for (int i = 0; i < codeLength; i++)
             {
-                switch (Mathf.RoundToInt(Random.Range(0, 1)))
+                switch (Mathf.RoundToInt(Random.Range(0, 2)))
                 {
                     case 0:
                         newCode += theAlphabet[Mathf.RoundToInt(Random.Range(0, 25))];
@@ -125,36 +116,24 @@ public class Launcher : MonoBehaviourPunCallbacks
             roomCode = newCode;
         } while (roomCode == "ABC123" || roomCodes.Contains(roomCode));
 
-        roomCodes.Add(roomCode);
-
         progressLabel.SetActive(true);
         controlPanel.SetActive(false);
 
-        // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
-        if (PhotonNetwork.IsConnected)
-        {
-            // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
-            //PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
-            PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
-            PhotonNetwork.JoinRoom(roomCode);
-        }
-        else
-        {
-            // #Critical, we must first and foremost connect to Photon Online Server.
-            isConnecting = PhotonNetwork.ConnectUsingSettings();
-            PhotonNetwork.GameVersion = gameVersion;
-        }
+        isConnecting = PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.GameVersion = gameVersion;
     }
 
     public void JoinLobby()
     {
-        string roomCode = roomCodeInput.text.Trim();
+        roomCode = roomCodeInput.text.Trim();
+
         if (roomCode != null && !roomCode.Contains(" "))
         {
-            PhotonNetwork.JoinRoom(roomCode);
-        } else
-        {
-            //Room does not exist message 
+            progressLabel.SetActive(true);
+            controlPanel.SetActive(false);
+
+            isConnecting = PhotonNetwork.ConnectUsingSettings();
+            PhotonNetwork.GameVersion = gameVersion;
         }
     }
 
@@ -162,11 +141,16 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     #region MonoBehaviourPunCallbacks Callbacks
 
-
     public override void OnConnectedToMaster()
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
-        PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+
+        if(!roomCodes.Contains(roomCode))
+        {
+            PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+            roomCodes.Add(roomCode);
+        }
+
         PhotonNetwork.JoinRoom(roomCode);
         isConnecting = false;
     }
@@ -181,12 +165,13 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
     }
 
-    public override void OnJoinRandomFailed(short returnCode, string message)
+    public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
+        Debug.Log(message);
 
-        // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        progressLabel.SetActive(false);
+        controlPanel.SetActive(true);
+        isConnecting = false;
     }
 
     public override void OnJoinedRoom()
