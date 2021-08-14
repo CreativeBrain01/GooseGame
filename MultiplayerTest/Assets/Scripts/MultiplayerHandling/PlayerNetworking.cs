@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using Photon.Pun;
 
 public class PlayerNetworking : MonoBehaviour
@@ -8,6 +9,9 @@ public class PlayerNetworking : MonoBehaviour
     public MonoBehaviour[] scriptsToIgnore;
 
     private PhotonView photonView;
+
+    [SerializeField]
+    TMP_Text characteNameBox;
 
     // Start is called before the first frame update
     void Start()
@@ -20,5 +24,7 @@ public class PlayerNetworking : MonoBehaviour
                 script.enabled = false;
             }
         }
+
+        characteNameBox.text = PhotonNetwork.NickName;
     }
 }

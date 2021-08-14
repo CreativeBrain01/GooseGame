@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -22,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
     bool canJump = false;
     EdgeCollider2D bottomCollider;
 
+    [SerializeField]
+    TMP_Text NameUI;
+
     float dt { get => Time.deltaTime; }
 
     void Start()
@@ -37,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isLeft = true;
             transform.rotation = Quaternion.AngleAxis(0, Vector2.up);
+            NameUI.transform.rotation = new Quaternion(0, 0, 0, 0);
         }
         else
         {
@@ -48,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isRight = true;
             transform.rotation = Quaternion.AngleAxis(180, Vector2.up);
+            NameUI.transform.rotation = new Quaternion(0, 180, 0, 0);
         }
         else
         {
