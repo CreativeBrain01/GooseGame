@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class LobbyHandler : MonoBehaviourPunCallbacks
 {
@@ -17,6 +18,9 @@ public class LobbyHandler : MonoBehaviourPunCallbacks
 
     [SerializeField]
     Text textCopied;
+
+    [SerializeField]
+    Text[] playerNameTxt;
 
     #region Private Methods
 
@@ -38,6 +42,49 @@ public class LobbyHandler : MonoBehaviourPunCallbacks
         } else
         {
             textCopied.text = "";
+        }
+
+        List<Player> players = new List<Player>();
+        players.AddRange(PhotonNetwork.PlayerList);
+
+        switch (players.Count)
+        {
+            case 1:
+                playerNameTxt[0].text = players[0].NickName;
+                playerNameTxt[1].transform.parent.gameObject.SetActive(false);
+                playerNameTxt[2].transform.parent.gameObject.SetActive(false);
+                playerNameTxt[3].transform.parent.gameObject.SetActive(false);
+                break;
+
+            case 2:
+                playerNameTxt[0].text = players[0].NickName;
+                playerNameTxt[1].text = players[1].NickName;
+                playerNameTxt[1].transform.parent.gameObject.SetActive(true);
+                playerNameTxt[2].transform.parent.gameObject.SetActive(false);
+                playerNameTxt[3].transform.parent.gameObject.SetActive(false);
+                break;
+
+            case 3:
+                playerNameTxt[0].text = players[0].NickName;
+                playerNameTxt[1].text = players[1].NickName;
+                playerNameTxt[2].text = players[2].NickName;
+                playerNameTxt[1].transform.parent.gameObject.SetActive(true);
+                playerNameTxt[2].transform.parent.gameObject.SetActive(true);
+                playerNameTxt[3].transform.parent.gameObject.SetActive(false);
+                break;
+
+            case 4:
+                playerNameTxt[0].text = players[0].NickName;
+                playerNameTxt[1].text = players[1].NickName;
+                playerNameTxt[2].text = players[2].NickName;
+                playerNameTxt[3].text = players[3].NickName;
+                playerNameTxt[1].transform.parent.gameObject.SetActive(true);
+                playerNameTxt[2].transform.parent.gameObject.SetActive(true);
+                playerNameTxt[3].transform.parent.gameObject.SetActive(true);
+                break;
+
+            default:
+                break;
         }
     }
 
