@@ -4,7 +4,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 
-public class Launcher : MonoBehaviourPunCallbacks
+public class Launcher : MonoBehaviourPunCallbacks, ILobbyCallbacks
 {
     #region Private Serializable Fields
     /// <summary>
@@ -34,8 +34,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// </summary>
     string gameVersion = "1";
     bool isConnecting;
-
-    List<string> roomCodes;
     #endregion
 
 
@@ -50,7 +48,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         // #Critical
         // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
         PhotonNetwork.AutomaticallySyncScene = true;
-        roomCodes = new List<string>();
     }
 
     #endregion
@@ -114,13 +111,15 @@ public class Launcher : MonoBehaviourPunCallbacks
                 }
             }
             roomCode = newCode;
-        } while (roomCode == "ABC123" || roomCodes.Contains(roomCode));
+        } while (roomCode == "ABC123");
 
         progressLabel.SetActive(true);
         controlPanel.SetActive(false);
 
         isConnecting = PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.GameVersion = gameVersion;
+
+        isHost = true;
     }
 
     public void JoinLobby()
@@ -139,22 +138,22 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     #endregion
 
+    bool isHost = false;
+
     #region MonoBehaviourPunCallbacks Callbacks
 
     public override void OnConnectedToMaster()
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
 
-        if(!roomCodes.Contains(roomCode))
+        if(isHost)
         {
             PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
-            roomCodes.Add(roomCode);
         }
 
         PhotonNetwork.JoinRoom(roomCode);
         isConnecting = false;
     }
-
 
     public override void OnDisconnected(DisconnectCause cause)
     {
