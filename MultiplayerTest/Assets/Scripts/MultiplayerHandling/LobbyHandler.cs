@@ -15,6 +15,8 @@ public class LobbyHandler : MonoBehaviourPunCallbacks
     [SerializeField]
     Text RoomCode;
 
+    [SerializeField]
+    Text textCopied;
 
     #region Private Methods
 
@@ -26,6 +28,25 @@ public class LobbyHandler : MonoBehaviourPunCallbacks
         }
 
         RoomCode.text = "Room Code: " + PhotonNetwork.CurrentRoom.Name;
+    }
+
+    private void Update()
+    {
+        if (txtCopyTimer > 0.0f)
+        {
+            txtCopyTimer -= Time.deltaTime;
+        } else
+        {
+            textCopied.text = "";
+        }
+    }
+
+    float txtCopyTimer = 0.0f;
+    public void CopyCode()
+    {
+        textCopied.text = "Code copied to clipboard!!";
+        txtCopyTimer = 5.0f;
+        Utility.CopyToClipboard(PhotonNetwork.CurrentRoom.Name);
     }
 
     public void LoadArena()
