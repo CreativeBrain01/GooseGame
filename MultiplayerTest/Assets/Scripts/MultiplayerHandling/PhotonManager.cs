@@ -17,15 +17,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        int index = 0;
-        do
-        {
-            index = (int)Random.Range(0, spawnPoints.Length - 1);
-        } while (usedSpawns.Contains(index));
-
-        Transform chosenSpawn = spawnPoints[index].transform;
-
-        PhotonNetwork.Instantiate("Prefabs/Player", chosenSpawn.position, Quaternion.identity);
+        RespawnManager.Instance.playerManager = this;
+        Spawn();
 
         foreach (var button in FindObjectsOfType<Button>())
         {
@@ -41,5 +34,20 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public void GoToLobby()
     {
         PhotonNetwork.LoadLevel("Lobby");
+    }
+
+    public void Spawn()
+    {
+        int index = 0;
+        do
+        {
+            index = (int)Random.Range(0, spawnPoints.Length - 1);
+        } while (usedSpawns.Contains(index));
+
+        usedSpawns.Clear();
+
+        Transform chosenSpawn = spawnPoints[index].transform;
+
+        PhotonNetwork.Instantiate("Prefabs/Player", chosenSpawn.position, Quaternion.identity);
     }
 }
