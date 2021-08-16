@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -29,6 +30,7 @@ public class BulletMovement : MonoBehaviour
         if(collision.collider.gameObject.layer == 6)
         {
             Debug.Log("Hit");
+            PhotonNetwork.Destroy(collision.collider.gameObject);
         }
         Destroy(gameObject);
     }
