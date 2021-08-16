@@ -364,6 +364,8 @@ namespace Photon.Pun
             }
         }
 
+        public static byte ActivePlayers { get; set; } = 0;
+
         /// <summary>
         /// A sorted copy of the players-list of the current room. This is using Linq, so better cache this value. Update when players join / leave.
         /// </summary>

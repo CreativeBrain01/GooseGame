@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -28,10 +29,13 @@ public class PlayerMovement : MonoBehaviour
 
     float dt { get => Time.deltaTime; }
 
+    private PhotonView photonView;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         bottomCollider = GetComponent<EdgeCollider2D>();
+        photonView = GetComponent<PhotonView>();
     }
 
     void Update() 
