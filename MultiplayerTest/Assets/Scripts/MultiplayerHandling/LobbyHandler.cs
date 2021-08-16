@@ -103,23 +103,28 @@ public class LobbyHandler : MonoBehaviourPunCallbacks
             Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
         }
 
-        switch (arenaSelection.value)
+        List<Player> players = new List<Player>();
+        players.AddRange(PhotonNetwork.PlayerList);
+        if (players.Count > 1)
         {
-            case 0:
-                PhotonNetwork.LoadLevel("Arena1");
-                break;
+            switch (arenaSelection.value)
+            {
+                case 0:
+                    PhotonNetwork.LoadLevel("Arena1");
+                    break;
 
-            case 1:
-                PhotonNetwork.LoadLevel("Arena2");
-                break;
+                case 1:
+                    PhotonNetwork.LoadLevel("Arena2");
+                    break;
 
-            case 2:
-                PhotonNetwork.LoadLevel("Arena3");
-                break;
+                case 2:
+                    PhotonNetwork.LoadLevel("Arena3");
+                    break;
 
-            default:
-                Debug.LogError("Failed to load scene. Parhaps it doesn't exist?");
-                break;
+                default:
+                    Debug.LogError("Failed to load scene. Parhaps it doesn't exist?");
+                    break;
+            }
         }
     }
 
