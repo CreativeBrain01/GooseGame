@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     GameObject[] spawnPoints;
+
+    GameObject lobbyButton;
 
     public List<int> usedSpawns = new List<int>();
 
@@ -23,5 +26,20 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Transform chosenSpawn = spawnPoints[index].transform;
 
         PhotonNetwork.Instantiate("Prefabs/Player", chosenSpawn.position, Quaternion.identity);
+
+        foreach (var button in FindObjectsOfType<Button>())
+        {
+            if (button.tag == "LobbyBtn") lobbyButton = button.gameObject;
+        }
+
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            lobbyButton.SetActive(false);
+        }
+    }
+
+    public void GoToLobby()
+    {
+        PhotonNetwork.LoadLevel("Lobby");
     }
 }
