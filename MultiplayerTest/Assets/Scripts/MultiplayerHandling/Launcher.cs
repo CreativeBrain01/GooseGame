@@ -2,8 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections.Generic;
 
-public class Launcher : MonoBehaviourPunCallbacks
+public class Launcher : MonoBehaviourPunCallbacks, ILobbyCallbacks
 {
     #region Private Serializable Fields
     /// <summary>
@@ -18,6 +19,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     [Tooltip("The UI Label to inform the user that the connection is in progress.")]
     [SerializeField]
     private GameObject progressLabel;
+
+    [SerializeField]
+    InputField roomCodeInput;
     
     #endregion
 
@@ -30,7 +34,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// </summary>
     string gameVersion = "1";
     bool isConnecting;
-
     #endregion
 
 
@@ -46,16 +49,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
         PhotonNetwork.AutomaticallySyncScene = true;
     }
-
-
-    /// <summary>
-    /// MonoBehaviour method called on GameObject by Unity during initialization phase.
-    /// </summary>
-    void Start()
-    {
-        
-    }
-
 
     #endregion
 
@@ -87,18 +80,80 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
     }
 
+    string theAlphabet = "abcdefghijklmnopqrstuvwxyz";
+
+    string roomCode = "ABC123";
+    public void HostLobby()
+    {
+        //Ensuring Username is OK
+        //Generating Roomcode
+        int nickL = PhotonNetwork.NickName.Length;
+        int codeLength = Mathf.Clamp(nickL, 4, 8);
+
+        do
+        {
+            string newCode = "";
+            for (int i = 0; i < codeLength; i++)
+            {
+                switch (Mathf.RoundToInt(Random.Range(0, 2)))
+                {
+                    case 0:
+                        newCode += theAlphabet[Mathf.RoundToInt(Random.Range(0, 25))];
+                        break;
+
+                    case 1:
+                        newCode += Mathf.RoundToInt(Random.Range(0, 9));
+                        break;
+
+                    default:
+                        Debug.LogError("Woops random code generation ran into an issue. This could cause long waiting times please fix.");
+                        break;
+                }
+            }
+            roomCode = newCode;
+        } while (roomCode == "ABC123");
+
+        progressLabel.SetActive(true);
+        controlPanel.SetActive(false);
+
+        isConnecting = PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.GameVersion = gameVersion;
+
+        isHost = true;
+    }
+
+    public void JoinLobby()
+    {
+        roomCode = roomCodeInput.text.Trim();
+
+        if (roomCode != null && !roomCode.Contains(" "))
+        {
+            progressLabel.SetActive(true);
+            controlPanel.SetActive(false);
+
+            isConnecting = PhotonNetwork.ConnectUsingSettings();
+            PhotonNetwork.GameVersion = gameVersion;
+        }
+    }
+
     #endregion
 
-    #region MonoBehaviourPunCallbacks Callbacks
+    bool isHost = false;
 
+    #region MonoBehaviourPunCallbacks Callbacks
 
     public override void OnConnectedToMaster()
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
-        PhotonNetwork.JoinRandomRoom();
+
+        if(isHost)
+        {
+            PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        }
+
+        PhotonNetwork.JoinRoom(roomCode);
         isConnecting = false;
     }
-
 
     public override void OnDisconnected(DisconnectCause cause)
     {
@@ -109,12 +164,13 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
     }
 
-    public override void OnJoinRandomFailed(short returnCode, string message)
+    public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
+        Debug.Log(message);
 
-        // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        progressLabel.SetActive(false);
+        controlPanel.SetActive(true);
+        isConnecting = false;
     }
 
     public override void OnJoinedRoom()
